@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Calendar &amp; Clock</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Chivo+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main class="app">
+  <div class="side">
+    <section class="clock" aria-label="Digital clock">
+      <div class="clock-time" id="clockTime" role="timer" aria-live="off">00:00<span class="clock-sec">00</span></div>
+      <div class="clock-date" id="clockDate"></div>
+      <div class="clock-foot">
+        <span class="clock-next" id="clockNext"></span>
+        <button class="fmt-btn" id="fmtBtn" type="button" aria-label="Switch between 12 and 24 hour time">12 h</button>
+      </div>
+    </section>
+
+    <section class="panel" aria-live="polite" aria-labelledby="panelTitle">
+      <div class="panel-head">
+        <div>
+          <h2 id="panelTitle">Selected day</h2>
+          <p class="panel-sub" id="panelSub"></p>
+        </div>
+        <button class="btn" id="addBtn" type="button">Add</button>
+      </div>
+      <ul class="list" id="list"></ul>
+      <p class="hint">Click a date to see its events. Double-click a date to add one.</p>
+    </section>
+  </div>
+
+  <section class="cal" aria-label="Calendar">
+    <div class="cal-head">
+      <h1 class="cal-title" id="calTitle"></h1>
+      <div class="cal-nav">
+        <button class="nav-btn" id="prevBtn" type="button" aria-label="Previous month">&#8249;</button>
+        <button class="nav-btn" id="todayBtn" type="button">Today</button>
+        <button class="nav-btn" id="nextBtn" type="button" aria-label="Next month">&#8250;</button>
+      </div>
+    </div>
+    <div class="grid" id="dow"></div>
+    <div class="grid" id="grid" role="grid"></div>
+    <div class="legend" aria-hidden="true">
+      <span><i class="sw today"></i>Today</span>
+      <span><i class="sw sel"></i>Selected</span>
+      <span><i class="sw ev"></i>Has event</span>
+      <span><i class="sw rem"></i>Has reminder</span>
+    </div>
+  </section>
+</main>
+
+<dialog id="dlg">
+  <div class="dlg" id="dlgForm">
+    <h3 id="dlgTitle">New entry</h3>
+    <p class="sub" id="dlgDate"></p>
+    <label>Title
+      <input type="text" id="fTitle" maxlength="80" placeholder="e.g. Project review" autocomplete="off">
+    </label>
+    <div class="row">
+      <label>Time (optional)
+        <input type="time" id="fTime">
+      </label>
+      <div>
+        <div style="font-size:0.86rem;font-weight:600;margin-bottom:5px">Type</div>
+        <div class="types">
+          <label class="type-opt"><input type="radio" name="ftype" value="event" checked><span>Event</span></label>
+          <label class="type-opt"><input type="radio" name="ftype" value="reminder"><span>Reminder</span></label>
+        </div>
+      </div>
+    </div>
+    <label>Notes (optional)
+      <textarea id="fNote" maxlength="300"></textarea>
+    </label>
+    <p class="err" id="fErr" role="alert"></p>
+    <div class="actions">
+      <button class="btn ghost" type="button" id="cancelBtn">Cancel</button>
+      <button class="btn" type="button" id="saveBtn">Save</button>
+    </div>
+  </div>
+</dialog>
+
+<div class="toast" id="toast" role="status"></div>
+
+<script src="script.js"></script>
+</body>
+</html>
